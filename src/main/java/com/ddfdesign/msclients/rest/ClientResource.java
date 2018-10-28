@@ -33,6 +33,8 @@ public class ClientResource {
     @RequestMapping(value = "client/{idClient}", method = RequestMethod.GET)
     public ResponseEntity<ClientDTO> getClientByIdClient(@PathVariable Long idClient) {
         ClientDTO listaClient = gestionClients.getClientById(idClient);
+        if (listaClient == null)
+            return null;
         return ResponseEntity.ok(listaClient);
     }
 
@@ -77,5 +79,13 @@ public class ClientResource {
     public List<ClientDTO> getAllClientsList() {
         List<ClientDTO> listaClients = gestionClients.getAllClients();
         return listaClients;
+    }
+
+    @RequestMapping(value = "clientOne/{idClient}", method = RequestMethod.GET)
+    public ClientDTO getClientByIdClientOne(@PathVariable Long idClient) {
+        ClientDTO listaClient = gestionClients.getClientById(idClient);
+        if (listaClient == null)
+            return null;
+        return listaClient;
     }
 }

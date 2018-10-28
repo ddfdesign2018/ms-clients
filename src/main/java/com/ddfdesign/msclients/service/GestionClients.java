@@ -48,6 +48,8 @@ public class GestionClients implements IGestionClients{
     @Override
     public ClientDTO getClientById(Long idClient){
         Optional<Client> clientOptional = clientsRepository.findById(idClient);
+        if (!clientOptional.isPresent())
+            return null;
         Client client = clientOptional.get();
         ClientDTO clientDTO = new ClientDTO(
                 client.getId(),
