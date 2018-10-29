@@ -10,4 +10,5 @@ public interface IGestionClients {
     ClientDTO createClientById(ClientDTO clientDTO);
     boolean deleteClientById(Long idClient);
     boolean updateClientById(ClientDTO clientDTO);
+    List<ClientDTO> getClientByDni(String dni);
 }

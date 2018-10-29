@@ -81,11 +81,19 @@ public class ClientResource {
         return listaClients;
     }
 
-    @RequestMapping(value = "clientOne/{idClient}", method = RequestMethod.GET)
-    public ClientDTO getClientByIdClientOne(@PathVariable Long idClient) {
-        ClientDTO listaClient = gestionClients.getClientById(idClient);
+    @RequestMapping(value = "clientOne/{dni}", method = RequestMethod.GET)
+    public List<ClientDTO> getClientByDniOne(@PathVariable String dni) {
+        List<ClientDTO> listaClient = gestionClients.getClientByDni(dni);
         if (listaClient == null)
             return null;
         return listaClient;
+    }
+
+    @RequestMapping(value = "clientClient/{idClient}", method = RequestMethod.GET)
+    public ClientDTO getClientByIdOne(@PathVariable Long idClient) {
+        ClientDTO clientDTO = gestionClients.getClientById(idClient);
+        if (clientDTO == null)
+            return null;
+        return clientDTO;
     }
 }

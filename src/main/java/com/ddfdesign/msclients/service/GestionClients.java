@@ -6,6 +6,7 @@ import com.ddfdesign.msclients.rest.dto.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -132,5 +133,27 @@ public class GestionClients implements IGestionClients{
         );
         clientsRepository.save(client);
         return true;
+    }
+
+    @Override
+    public List<ClientDTO> getClientByDni(String dni) {
+        List<ClientDTO> clientsDni = new ArrayList<>();
+        List<Client> clientList = clientsRepository.findByDni(dni);
+        clientList.forEach(client -> {
+            ClientDTO clientDTO = new ClientDTO(
+                    client.getId(),
+                    client.getName(),
+                    client.getSurnames(),
+                    client.getDni(),
+                    client.getPhone(),
+                    client.getAddress(),
+                    client.getEmail(),
+                    client.getStatus(),
+                    client.getLast_buy());
+            clientsDni.add(clientDTO);
+            return;
+        });
+
+        return clientsDni;
     }
 }
